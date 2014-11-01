@@ -1,0 +1,6 @@
+node_modules/
+docs/
+.grunt/
+.DS_Store
+.tmp
+.orig

@@ -1,0 +1,21 @@
+{
+  "name": "svg-icons",
+  "version": "1.0.0",
+  "devDependencies": {
+    "browser-sync": "^1.5.2",
+    "gulp": "^3.8.0",
+    "gulp-autoprefixer": "^1.0.1",
+    "gulp-changed": "^1.0.0",
+    "gulp-concat": "^2.4.1",
+    "gulp-csso": "^0.2.9",
+    "gulp-duration": "0.0.0",
+    "gulp-imagemin": "^1.0.1",
+    "gulp-less": "^1.3.6",
+    "gulp-newer": "^0.3.0",
+    "gulp-notify": "^1.8.0",
+    "gulp-plumber": "^0.6.6",
+    "gulp-size": "^1.1.0",
+    "gulp-svg-sprites": "^1.0.3",
+    "gulp-uglify": "^1.0.1"
+  }
+}
