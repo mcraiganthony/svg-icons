@@ -37,12 +37,8 @@ var paths =  {
 // Styles
 gulp.task('styles', function() {
   return gulp.src(["src/less/app.less"])
-    .pipe(plumber(function(error) {
-          
-        }))
     .pipe(less({ compress: true }))
     .pipe(autoprefixer({ browsers: ['last 2 versions','ie 9'], cascade: false }))
-    .pipe(plumber.stop())
     .pipe(gulp.dest(paths.styles.dist_dir))
     .pipe(duration("building styles"))
     .pipe(notify({ message: "styles task complete" }))
