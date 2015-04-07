@@ -15,7 +15,8 @@
     "gulp-notify": "^1.8.0",
     "gulp-plumber": "^0.6.6",
     "gulp-size": "^1.1.0",
-    "gulp-svg-sprites": "^1.0.3",
-    "gulp-uglify": "^1.0.1"
+    "gulp-svg-sprite": "^1.1.0",
+    "gulp-uglify": "^1.0.1",
+    "vinyl": "^0.4.6"
   }
 }
