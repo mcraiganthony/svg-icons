@@ -30,6 +30,10 @@ var paths =  {
   'svgicons': {
     'src_files': 'src/icons/svg/*.svg',
     'dist_dir': 'dist/icons/'
+  },
+  "js": {
+    "src_files": "src/js/*.js",
+    "dist_dir": "dist/js/"
   }
 };
 
@@ -44,8 +48,6 @@ gulp.task('styles', function() {
     .pipe(notify({message:'styles task complete'}))
     .pipe(reload({stream:true}));
 });
-
-
 
 
 // SVG Icons
@@ -74,11 +76,25 @@ gulp.task('svgicons', function () {
 });
 
 
+// Javascript
+gulp.task('js', function() {
+  return gulp.src([
+    'bower_components/svg4everybody/svg4everybody.min.js',
+    paths.js.src_files
+    ])
+    .pipe(concat('app.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest(paths.js.dist_dir))
+    .pipe(duration("building js"))
+    .pipe(notify({ message: "js task complete" }))
+    .pipe(reload({stream:true}));
+});
 
 // Watch
 gulp.task('watch', function() {
   gulp.watch(paths.styles.src_files, ['styles']);
   gulp.watch(paths.svgicons.src_files, ['svgicons']);
+  gulp.watch(paths.js.src_files, ['js']);
 });
 
 
@@ -94,7 +110,7 @@ gulp.task('browser-sync', function() {
 
 
 // Default task
-gulp.task('default', ['styles','svgicons']);
+gulp.task('default', ['styles','svgicons','js']);
 
 gulp.task('server', ['watch', 'browser-sync'], function () {
     gulp.watch([paths.html.src_files], reload);
