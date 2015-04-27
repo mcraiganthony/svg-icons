@@ -13,24 +13,85 @@
 
 	<div class="container">
 
-    <div class="jumbotron">
+    <div class="intro">
       <h1>SVG Icon System <svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="text-danger icon"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="text-info icon"><use xlink:href="icons/sprite.svg#heart"/></svg></h1>
-      <p>The page demonstrations how to implement an svg icon system. It touches on various techniques that come in handy based on an icon's context within the page.</p>
+      <p>This page demonstrates <em>how</em> to use an svg icon system. I won't touch on the build process as that can be seen by studying the repo.</p>
       <p><a class="btn btn-primary btn-lg" href="icons/sprite.symbol.html" target="_blank" role="button">View Icons</a></p>
     </div>
 
     <section>
-      <h1>Inline SVG - SVG &lt;use&gt; with External Source</h1>
-      <h3>The Basics</h3>
-      <p>Using an external svg sprite gives us caching and the ability to use inline svg. For additional information, <a href="https://css-tricks.com/svg-use-external-source/" target="_blank">see Chris Coyier's great explanation</a>. Svg icon "fill" definitions should be removed from each svg icon so that the icons can inherit the body color by default. Remove "fill" definitions also allows svg icons to be colored using CSS.</p>
-      <pre><code><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> = &lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt;
+      <h1>Inline SVG &lt;use&gt; with External Source</h1>
+
+      <h2>The CSS</h2>
+      <p>In this system, icons receive the <code>.icon</code> class. Icon width and height is set to 1em. This allows the icons to inherit font size - therefore specific widths and heights DO NOT need to be set! It's a beautiful solution.</p>
+      <pre class="prettyprint"><code>.icon {
+  display: inline-block;
+  fill: currentColor;
+  height: 1em;
+  line-height: 1;
+  position: relative;
+  top: -1px;
+  vertical-align: middle;
+  width: 1em;
+}</code></pre>
+
+      <h2>Basic Usage</h2>
+      <p>Using an external svg sprite gives us caching and the ability to use inline svg. For additional information and caveats, <a href="https://css-tricks.com/svg-use-external-source/" target="_blank">see Chris Coyier's great explanation</a>.</p>
+      <div class="alert alert-info" role="alert"><strong>Remove SVG Fills!</strong> For single-color icons, all "fill" definitions should be removed from each svg icon so that the icons can inherit the body color and be colored using CSS.</div>
+      <p class="example">
+        <svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg>
+        <svg class="icon"><use xlink:href="icons/sprite.svg#fire"/></svg>
+        <svg class="icon"><use xlink:href="icons/sprite.svg#cog"/></svg>
+        <svg class="icon"><use xlink:href="icons/sprite.svg#warning"/></svg>
+        <svg class="icon"><use xlink:href="icons/sprite.svg#tag"/></svg>
+        <svg class="icon"><use xlink:href="icons/sprite.svg#user"/></svg>
+      </p>
+      <pre class="prettyprint"><code><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> = &lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt;
 <svg class="icon"><use xlink:href="icons/sprite.svg#fire"/></svg> = &lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#fire"/&gt;&lt;/svg&gt;</code></pre>
-      <p>Here is an example:</p>
-      <p class="example"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="icon"><use xlink:href="icons/sprite.svg#fire"/></svg> <svg class="icon"><use xlink:href="icons/sprite.svg#cog"/></svg> <svg class="icon"><use xlink:href="icons/sprite.svg#warning"/></svg> <svg class="icon"><use xlink:href="icons/sprite.svg#tag"/></svg> <svg class="icon"><use xlink:href="icons/sprite.svg#user"/></svg></p>
-      <h3>The Basics</h3>
+      
+      <h2>Adding Color</h2>
+      <p>Now that you understand the basics, let's add some color. In this example, we are simply adding a contextual color class to the icon class. You could just as easily use a inline style.</p>
+      <p class="example">
+        <svg class="icon text-danger"><use xlink:href="icons/sprite.svg#heart"/></svg>
+        <svg class="icon text-success"><use xlink:href="icons/sprite.svg#fire"/></svg>
+        <svg class="icon text-primary"><use xlink:href="icons/sprite.svg#cog"/></svg>
+        <svg class="icon text-warning"><use xlink:href="icons/sprite.svg#warning"/></svg>
+        <svg class="icon text-info"><use xlink:href="icons/sprite.svg#tag"/></svg>
+        <svg class="icon text-muted"><use xlink:href="icons/sprite.svg#user"/></svg>
+      </p>
+      <pre class="prettyprint"><code><svg class="icon text-danger"><use xlink:href="icons/sprite.svg#heart"/></svg> = &lt;svg class="icon text-danger"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt;
+<svg class="icon text-success"><use xlink:href="icons/sprite.svg#fire"/></svg> = &lt;svg class="icon text-success"&gt;&lt;use xlink:href="icons/sprite.svg#fire"/&gt;&lt;/svg&gt;</code></pre>
+
+      <p>In this example, you'll see how the icons inherit color from their parent.</p>
+      <p class="example text-info">
+        <svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg>
+        <svg class="icon"><use xlink:href="icons/sprite.svg#fire"/></svg>
+        <svg class="icon"><use xlink:href="icons/sprite.svg#cog"/></svg>
+        <svg class="icon"><use xlink:href="icons/sprite.svg#warning"/></svg>
+        <svg class="icon"><use xlink:href="icons/sprite.svg#tag"/></svg>
+        <svg class="icon"><use xlink:href="icons/sprite.svg#user"/></svg>
+      </p>
+      <pre class="prettyprint"><code>&lt;p class="text-info"&gt;
+  &lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt;
+  &lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#fire"/&gt;&lt;/svg&gt;
+  &lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#cog"/&gt;&lt;/svg&gt;
+  &lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#warning"/&gt;&lt;/svg&gt;
+  &lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#tag"/&gt;&lt;/svg&gt;
+  &lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#user"/&gt;&lt;/svg&gt;
+&lt;/p&gt;</code></pre>
+
+      <h2>Inside Anchor Tags</h2>
+      <p>In this example, you'll see how icons are used in an achor tag. Notice how the icons inherit CSS transitions from the anchor tag.</p>
+      <p class="example">
+        <a href="#"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> I love this link!</a>
+      </p>
+      <pre class="prettyprint"><code>&lt;a href="#"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt; I love this link!&lt;/a&gt;</code></pre>
+
+
+
     </section>
 
-
+    
 
     <!-- <div>
       <svg class="icon">
@@ -51,5 +112,7 @@
 	</div> -->
 
   <script src="js/app.js"></script>
+  <!-- prettify code examples; use class="prettyprint" on your pre blocks -->
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>
