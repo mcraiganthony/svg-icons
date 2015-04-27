@@ -6,34 +6,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400'>
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
 
-  <div class="section">
-  	<div class="container">
-  		<a href="icons/sprite.symbol.html" class="btn btn-default btn-lg">view icons</a><br><br>
-      <div>
-        <svg class="icon">
-          <use xlink:href="icons/sprite.svg#arrow-down" />
-        </svg>
-      </div>
-      <button class="btn btn-default">
-        <svg class="icon">
-          <use xlink:href="icons/sprite.svg#arrow-down" />
-        </svg>
-        Button
-      </button>
-      <button class="btn btn-default">Button</button>
-      <button class="btn btn-default btn-lg">
-        <svg class="icon">
-          <use xlink:href="icons/sprite.svg#arrow-down" />
-        </svg>
-        Button
-      </button>
-  	</div>
-  </div>
+	<div class="container">
+
+    <div class="jumbotron">
+      <h1>SVG Icon System <svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="text-danger icon"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="text-info icon"><use xlink:href="icons/sprite.svg#heart"/></svg></h1>
+      <p>The page demonstrations how to implement an svg icon system. It touches on various techniques that come in handy based on an icon's context within the page.</p>
+      <p><a class="btn btn-primary btn-lg" href="icons/sprite.symbol.html" target="_blank" role="button">View Icons</a></p>
+    </div>
+
+    <section>
+      <h1>Inline SVG - SVG &lt;use&gt; with External Source</h1>
+      <h3>The Basics</h3>
+      <p>Using an external svg sprite gives us caching and the ability to use inline svg. For additional information, <a href="https://css-tricks.com/svg-use-external-source/" target="_blank">see Chris Coyier's great explanation</a>. Svg icon "fill" definitions should be removed from each svg icon so that the icons can inherit the body color by default. Remove "fill" definitions also allows svg icons to be colored using CSS.</p>
+      <pre><code><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> = &lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt;
+<svg class="icon"><use xlink:href="icons/sprite.svg#fire"/></svg> = &lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#fire"/&gt;&lt;/svg&gt;</code></pre>
+      <p>Here is an example:</p>
+      <p class="example"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="icon"><use xlink:href="icons/sprite.svg#fire"/></svg> <svg class="icon"><use xlink:href="icons/sprite.svg#cog"/></svg> <svg class="icon"><use xlink:href="icons/sprite.svg#warning"/></svg> <svg class="icon"><use xlink:href="icons/sprite.svg#tag"/></svg> <svg class="icon"><use xlink:href="icons/sprite.svg#user"/></svg></p>
+      <h3>The Basics</h3>
+    </section>
+
+
+
+    <!-- <div>
+      <svg class="icon">
+        <use xlink:href="icons/sprite.svg#arrow-down" />
+      </svg>
+    </div>
+    <button class="btn btn-default">
+      <svg class="icon"><use xlink:href="icons/sprite.svg#arrow-down" /></svg>
+      Button
+    </button>
+    <button class="btn btn-default">Button</button>
+    <button class="btn btn-default btn-lg">
+      <svg class="icon">
+        <use xlink:href="icons/sprite.svg#arrow-down" />
+      </svg>
+      Button
+    </button>
+	</div> -->
+
   <script src="js/app.js"></script>
 </body>
 </html>

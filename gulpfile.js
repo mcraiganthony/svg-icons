@@ -21,14 +21,14 @@ var browserSync  = require('browser-sync'),
 // Path Variables
 var paths =  {
   'html': {
-    'src_files': '*.html'
+    'src_files': 'dist/*.html'
   },
   'styles': {
     'src_files': 'src/less/**/*.less',
     'dist_dir': 'dist/css/'
   },
   'svgicons': {
-    'src_files': 'src/icons/svg/*.svg',
+    'src_files': 'src/icons/*.svg',
     'dist_dir': 'dist/icons/'
   },
   "js": {
@@ -36,6 +36,13 @@ var paths =  {
     "dist_dir": "dist/js/"
   }
 };
+
+
+// HTML
+gulp.task('html', function() {
+  return gulp.src([paths.html.src_files])
+    .pipe(reload({stream:true}));
+});
 
 
 // Styles
@@ -95,6 +102,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.styles.src_files, ['styles']);
   gulp.watch(paths.svgicons.src_files, ['svgicons']);
   gulp.watch(paths.js.src_files, ['js']);
+  gulp.watch(paths.html.src_files, ['html']);
 });
 
 
