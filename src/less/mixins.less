@@ -1,6 +1,35 @@
 // File: mixins.less
 
 
+// -------------------------
+// Buttons
+// -------------------------
+
+// Button Outline Variant
+// -------------------------
+
+.button-outline-variant(@color; @background; @border; @hover-color) {
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    background-color: @color;
+    border-color: @border;
+    color: @hover-color;
+  }
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    background-image: none;
+  }
+}
+
+
 
 // -------------------------
 // SVG Background Fill

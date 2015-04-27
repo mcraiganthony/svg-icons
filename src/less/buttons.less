@@ -1,17 +1,34 @@
 // File: buttons.less
 
+// Buttons
+// -------------------------
+
 .btn {
   transition: all 250ms linear;
 }
 
-.btn-test {
-  &:hover {
-    color: red;
-  }
+.btn-secondary {
+  .button-variant(@btn-secondary-color; @btn-secondary-bg; @btn-secondary-border);
 }
 
 
+// Outline Buttons
+// -------------------------
 
+.btn-outline-default {
+  .button-outline-variant(@gray-darker; transparent; @gray-darker; @white);
+}
 
+.btn-outline-primary {
+  .button-outline-variant(@brand-primary; transparent; @brand-primary; @white);
+}
+
+.btn-outline-secondary {
+  .button-outline-variant(@brand-secondary; transparent; @brand-secondary; @white);
+}
+
+.btn-outline-white {
+  .button-outline-variant(@gray-light; transparent; @gray-light; @gray-darkest);
+}
 
 

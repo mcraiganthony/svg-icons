@@ -14,9 +14,9 @@
 	<div class="container">
 
     <div class="intro">
-      <h1>SVG Icon System <svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="text-danger icon"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="text-info icon"><use xlink:href="icons/sprite.svg#heart"/></svg></h1>
-      <p>This page demonstrates <em>how</em> to use an svg icon system. I won't touch on the build process as that can be seen by studying the repo.</p>
-      <p><a class="btn btn-primary btn-lg" href="icons/sprite.symbol.html" target="_blank" role="button">View Icons</a></p>
+      <h1>SVG Icon System <svg class="icon text-primary"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="text-danger icon"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="text-info icon"><use xlink:href="icons/sprite.svg#heart"/></svg></h1>
+      <p>This page demonstrates <em>how</em> to use an svg icon system. This system starts with a collection of svg icons that are compiled into a single svg sprite. I encourage you to study the Gulp file in <a href="https://github.com/mcraiganthony/svg-icons" target="_blank">the repo</a> in order to understand the actual build system.</p>
+      <p><a class="btn btn-primary btn-lg" href="icons/sprite.symbol.html" target="_blank" role="button">View Icons <svg class="icon"><use xlink:href="icons/sprite.svg#chevron-right"/></svg> </a></p>
     </div>
 
     <section>
@@ -35,9 +35,12 @@
   width: 1em;
 }</code></pre>
 
+      <h2>The SVGs</h2>
+      <p>We start with a collection of single-color svg icons. These icons are compiled into a single svg sprite (I will address multi-color svg icons in a bit).</p>
+      <div class="alert alert-info" role="alert"><strong>Remove SVG Fills!</strong> For single-color icons, all "fill" definitions should be removed from each svg icon <strong>before</strong> being compiled to a sprite so that the icons can inherit the body color and be colored using CSS.</div>
+
       <h2>Basic Usage</h2>
-      <p>Using an external svg sprite gives us caching and the ability to use inline svg. For additional information and caveats, <a href="https://css-tricks.com/svg-use-external-source/" target="_blank">see Chris Coyier's great explanation</a>.</p>
-      <div class="alert alert-info" role="alert"><strong>Remove SVG Fills!</strong> For single-color icons, all "fill" definitions should be removed from each svg icon so that the icons can inherit the body color and be colored using CSS.</div>
+      <p>Using an external svg sprite gives us caching and the ability to use inline svg. For additional information and caveats, <a href="https://css-tricks.com/svg-use-external-source/" target="_blank">see Chris Coyier's great explanation</a>. In this system, a collection of individual svgs are being compiled into a single svg sprite.</p>
       <p class="example">
         <svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg>
         <svg class="icon"><use xlink:href="icons/sprite.svg#fire"/></svg>
@@ -80,14 +83,36 @@
   &lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#user"/&gt;&lt;/svg&gt;
 &lt;/p&gt;</code></pre>
 
-      <h2>Inside Anchor Tags</h2>
+      <h2>Inside of Anchor Tags</h2>
       <p>In this example, you'll see how icons are used in an achor tag. Notice how the icons inherit CSS transitions from the anchor tag.</p>
-      <p class="example">
-        <a href="#"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> I love this link!</a>
+      <p class="example-sm">
+        <a href="#"><svg class="icon"><use xlink:href="icons/sprite.svg#bell"/></svg> Link One</a> | <a href="#"><svg class="icon"><use xlink:href="icons/sprite.svg#search"/></svg> Link Two</a> | <a href="#"><svg class="icon"><use xlink:href="icons/sprite.svg#paperclip"/></svg> Link Three</a>
       </p>
-      <pre class="prettyprint"><code>&lt;a href="#"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt; I love this link!&lt;/a&gt;</code></pre>
+      <pre class="prettyprint"><code>&lt;a href="#"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt; Link&lt;/a&gt;</code></pre>
 
-
+      <h2>Inside of Buttons</h2>
+      <p>In this example, you'll see how icons are used in buttons. Each icon inherits color, size, and transition from the button.</p>
+      <p>
+        <br>
+        <button class="btn btn-sm btn-primary"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> Button</button>
+        <button class="btn btn-sm btn-outline-primary"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> Button</button>
+        <button class="btn btn-sm btn-secondary"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> Button</button>
+        <button class="btn btn-sm btn-outline-secondary"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> Button</button>
+        <br><br>
+        <button class="btn btn-primary"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> Button</button>
+        <button class="btn btn-outline-primary"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> Button</button>
+        <button class="btn btn-secondary"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> Button</button>
+        <button class="btn btn-outline-secondary"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> Button</button>
+        <br><br>
+        <button class="btn btn-lg btn-primary"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> Button</button>
+        <button class="btn btn-lg btn-outline-primary"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> Button</button>
+        <button class="btn btn-lg btn-secondary"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> Button</button>
+        <button class="btn btn-lg btn-outline-secondary"><svg class="icon"><use xlink:href="icons/sprite.svg#heart"/></svg> Button</button>
+      </p>
+      <pre class="prettyprint"><code>&lt;button class="btn btn-sm btn-primary"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt; Button&lt;/button&gt;
+&lt;button class="btn btn-sm btn-outline-primary"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt; Button&lt;/button&gt;
+&lt;button class="btn btn-sm btn-secondary"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt; Button&lt;/button&gt;
+&lt;button class="btn btn-sm btn-outline-secondary"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt; Button&lt;/button&gt;</code></pre>
 
     </section>
 

@@ -7,6 +7,7 @@ var browserSync  = require('browser-sync'),
     csso         = require('gulp-csso'),
     duration     = require('gulp-duration'),
     filesize     = require('gulp-size'),
+    ghpages      = require('gulp-gh-pages'),
     imagemin     = require('gulp-imagemin'),
     less         = require('gulp-less'),
     newer        = require('gulp-newer'),
@@ -115,6 +116,12 @@ gulp.task('browser-sync', function() {
   });
 });
 
+
+// Website
+gulp.task('website', function () {
+  return gulp.src('./dist/**/*')
+    .pipe(ghpages());
+});
 
 
 // Default task
