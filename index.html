@@ -161,7 +161,8 @@
         <a href="#" class="list-group-item">Vestibulum at eros</a>
       </div>
       <h3>The CSS/LESS</h3>
-      <p>The icon is now white! Fantastic! Okay. Now things are going to get a bit more complex. This is where the power of a CSS preprocessor comes in handy. We are going to use a <a href="http://lesscss.org/" target="_blank">LESS</a> "parametric mixin" to <strong>modify the svg background fill</strong> (thanks to <a href="https://twitter.com/zslabs" target="_blank">Zach Schnackel</a> for his brilliant solution - <a href="http://zslabs.com/articles/svg-background-fill/" target="_blank">Modifying SVG Background FIlls</a>).</p>
+      <p>The icon is now white! Fantastic! Okay. Now things are going to get a bit more complex. This is where the power of a CSS preprocessor comes in handy. We are going to use a <a href="http://lesscss.org/" target="_blank">LESS</a> "parametric mixin" to modify the svg background fill.</p>
+
       <p>Check out the first line of the CSS/LESS code below. We call our <code>.svg-bg-add-fill()</code> LESS mixin and pass it two parameters: the path to the icon and a color (which can also be a variable). The mixin will generate a data-uri background image with a fill path using the color provided to the mixin.</p>
       <pre class="prettyprint"><code>#generated-demo-2 .list-group-item.active:after {
   .svg-bg-add-fill("../icons/checkmark.svg", "#ffffff"); // THIS IS THE ONLY DIFFERENCE BETWEEN THE TWO DEMOS!
@@ -177,6 +178,7 @@
   width: 1em;
 }</code></pre>
       
+      <div class="alert alert-info" role="alert"><a href="https://twitter.com/zslabs" target="_blank" class="alert-link">Zach Schnackel</a> authored the parametric LESS mixin below. It is a brilliant solution to modifying svg background fills. For more information, see his full article here: <a href="http://zslabs.com/articles/svg-background-fill/" target="_blank" class="alert-link">Modifying SVG Background FIlls</a>.</div>
       <h4>The Mixin</h4>
       <pre class="prettyprint"><code>.svg-bg-add-fill(@src, @fill-new) {
   @data-uri: data-uri('image/svg+xml;charset=UTF-8', "@{src}");
