@@ -15,7 +15,7 @@
 
     <div class="intro">
       <h1>SVG Icon System <svg class="icon text-primary"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="text-danger icon"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="text-info icon"><use xlink:href="icons/sprite.svg#heart"/></svg></h1>
-      <p>This page demonstrates <em>how</em> to use an svg icon system. This system starts with a collection of svg icons that are compiled into a single svg sprite. I encourage you to study the Gulp file in <a href="https://github.com/mcraiganthony/svg-icons" target="_blank">the repo</a> in order to understand the actual build system.</p>
+      <p>This page demonstrates <em>how</em> to use an svg icon system that works in browsers > IE8. This system starts with a collection of svg icons that are compiled into a single svg sprite. I encourage you to study the Gulp file in <a href="https://github.com/mcraiganthony/svg-icons" target="_blank">the repo</a> in order to understand the actual build system.</p>
       <p><a class="btn btn-primary btn-lg" href="icons/sprite.symbol.html" target="_blank" role="button">View Icons <svg class="icon"><use xlink:href="icons/sprite.svg#chevron-right"/></svg> </a></p>
     </div>
 
@@ -117,23 +117,91 @@
     </section>
     
     <section>
+
       <h1>SVG with Generated Content</h1>
       <p>In this example, I'm going to demonstrate how to use svg icons as generated content. Let's say that we have a list group and we want the <code>.active</code> list item to have a checkmark icon. We won't be using the svg sprite. Instead, we will use the individual <code>checkmark.svg</code> icon.</p>
-      <div class="list-group list-group--demo1">
+
+      <h2>Generated Demo One</h2>
+      <h3>The Demo</h3>
+      <p><code>.list-group-item.active</code> receives a checkmark icon using the <code>:after</code> pseudo selector.</p>
+      <div id="generated-demo-1" class="list-group">
         <a href="#" class="list-group-item">Cras justo odio</a>
         <a href="#" class="list-group-item active">Dapibus ac facilisis in</a>
         <a href="#" class="list-group-item">Morbi leo risus</a>
         <a href="#" class="list-group-item">Porta ac consectetur ac</a>
         <a href="#" class="list-group-item">Vestibulum at eros</a>
       </div>
-      <p></p>
-      <div class="list-group list-group--demo2">
+      <h3>The CSS</h3>
+      <p>The CSS is pretty straighforward. We simply set <code>checkmark.svg</code> as a background image. BAM! We have a nice checkmark icon on the active list item.</p>
+      <p><strong>Uh oh. There is still one problem</strong>. The icon is black. What if we wanted it to be another color? Because the icon is a background image, there is no way to alter the color with vanilla CSS. Don't fret. I'll address this in Generated Demo Two.</p>
+      <pre class="prettyprint"><code>#generated-demo-1 .list-group-item.active:after {
+  background-image: url("../icons/checkmark.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  content: "";
+  height: 1em;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1em;
+}</code></pre>
+      
+      <br>
+
+      <h2>Generated Demo Two</h2>
+      <h3>The Demo</h3>
+      <p><code>.list-group-item.active</code> receives a checkmark icon using the <code>:after</code> pseudo selector.</p>
+      <div id="generated-demo-2" class="list-group">
         <a href="#" class="list-group-item">Cras justo odio</a>
         <a href="#" class="list-group-item active">Dapibus ac facilisis in</a>
         <a href="#" class="list-group-item">Morbi leo risus</a>
         <a href="#" class="list-group-item">Porta ac consectetur ac</a>
         <a href="#" class="list-group-item">Vestibulum at eros</a>
       </div>
+      <h3>The CSS/LESS</h3>
+      <p>The icon is now white! Fantastic! Okay. Now things are going to get a bit more complex. This is where the power of a CSS preprocessor comes in handy. We are going to use a <a href="http://lesscss.org/" target="_blank">LESS</a> "parametric mixin" to <strong>modify the svg background fill</strong> (thanks to <a href="https://twitter.com/zslabs" target="_blank">Zach Schnackel</a> for his brilliant solution - <a href="http://zslabs.com/articles/svg-background-fill/" target="_blank">Modifying SVG Background FIlls</a>).</p>
+      <p>Check out the first line of the CSS/LESS code below. We call our <code>.svg-bg-add-fill()</code> LESS mixin and pass it two parameters: the path to the icon and a color (which can also be a variable). The mixin will generate a data-uri background image with a fill path using the color provided to the mixin.</p>
+      <pre class="prettyprint"><code>#generated-demo-2 .list-group-item.active:after {
+  .svg-bg-add-fill("../icons/checkmark.svg", "#ffffff"); // THIS IS THE ONLY DIFFERENCE BETWEEN THE TWO DEMOS!
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  content: "";
+  height: 1em;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1em;
+}</code></pre>
+      
+      <h4>The Mixin</h4>
+      <pre class="prettyprint"><code>.svg-bg-add-fill(@src, @fill-new) {
+  @data-uri: data-uri('image/svg+xml;charset=UTF-8', "@{src}");
+  @replace-default: escape('&lt;path ');
+  @replace-new: escape('&lt;path fill="@{fill-new}" ');
+  @replace-src: replace("@{data-uri}", @replace-default, @replace-new, "g");
+  background-image: e(@replace-src);
+}</code></pre>
+
+      <h4>The Output</h4>
+      <pre class="prettyprint"><code>#generated-demo-2 .list-group-item.active:after {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3C%3Fxml%20version%3D%221.0%22%20encodin…200.002-0.067%200.002-0.101%200.002z%22%3E%3C%2Fpath%3E%0A%3C%2Fsvg%3E%0A");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  content: "";
+  height: 1em;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1em;
+}</code></pre>
+      
+
     </section>
 
   <script src="js/app.js"></script>
