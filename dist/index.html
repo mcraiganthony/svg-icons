@@ -15,8 +15,12 @@
 
     <div class="intro">
       <h1>SVG Icon System <svg class="icon text-primary"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="text-danger icon"><use xlink:href="icons/sprite.svg#heart"/></svg> <svg class="text-info icon"><use xlink:href="icons/sprite.svg#heart"/></svg></h1>
-      <p>This page demonstrates <em>how</em> to use an svg icon system that works in browsers > IE8. This system starts with a collection of svg icons that are compiled into a single svg sprite. I encourage you to study the Gulp file in <a href="https://github.com/mcraiganthony/svg-icons" target="_blank">the repo</a> in order to understand the actual build system.</p>
-      <p><a class="btn btn-primary btn-lg" href="icons/sprite.symbol.html" target="_blank" role="button">View Icons <svg class="icon"><use xlink:href="icons/sprite.svg#chevron-right"/></svg> </a></p>
+      <p>This page demonstrates <em>how</em> to use an svg icon system that works in browsers > IE8. This system starts with a collection of svg icons that are compiled into a single svg sprite. I encourage you to study the Gulp file in <a href="https://github.com/mcraiganthony/svg-icons" target="_blank">my svg-icons repo</a> in order to understand the actual build system.</p>
+      <p><a class="btn btn-primary btn-lg" href="icons/sprite.symbol.html" target="_blank" role="button">View Icons</a>
+
+      <a class="btn btn-outline-primary btn-lg" href="https://twitter.com/Craig_Anthony" target="_blank" role="button"><svg class="icon"><use xlink:href="icons/sprite.svg#twitter"/></svg></a>
+      <a class="btn btn-outline-primary btn-lg" href="https://github.com/mcraiganthony" target="_blank" role="button"><svg class="icon"><use xlink:href="icons/sprite.svg#github"/></svg></a>
+      </p>
     </div>
 
     <section>
@@ -36,8 +40,8 @@
 }</code></pre>
 
       <h2>The SVGs</h2>
-      <p>We start with a collection of single-color svg icons. These icons are compiled into a single svg sprite. While we will predominantly use the svg sprite, we'll also want access to individual svgs - they'll come in handy when we tackle svgs in generated content.</p>
-      <div class="alert alert-info" role="alert"><strong>Remove SVG Fills!</strong> For single-color icons, all "fill" definitions should be removed from each svg icon <strong>before</strong> being compiled to a sprite so that the icons can inherit the body color and be colored using CSS.</div>
+      <p>We start with a collection of svg icons. These icons are compiled into a single svg sprite using <a href="https://github.com/jkphl/gulp-svg-sprite" target="_blank">gulp-svg-sprite</a>. While we will predominantly use the svg sprite, we'll also want access to individual svgs - they'll come in handy when we tackle svgs in generated content.</p>
+      <div class="alert alert-info" role="alert"><strong>Remove SVG Fills for Single-Color Icons!</strong> For single-color icons, all fill definitions should be removed from each svg icon <strong>before</strong> being compiled into a sprite so that the icons can inherit the body color and be colored using CSS. For multi-colored icons, the fill definitions may remain.</div>
 
       <h2>Basic Usage</h2>
       <p>Using an external svg sprite gives us caching and the ability to use inline svg. For additional information and caveats, <a href="https://css-tricks.com/svg-use-external-source/" target="_blank">see Chris Coyier's great explanation</a>. A polyfill is necessary for IE 9-11. If you hate the idea of a polyfill, it's okay. This system will still work for you. Simply include the svg sprite on every page and change the <code>use xlink:href</code> reference to ONLY be the hashtag and filename.</p>
@@ -88,7 +92,7 @@
       <p class="example-sm">
         <a href="#"><svg class="icon"><use xlink:href="icons/sprite.svg#bell"/></svg> Link One</a> | <a href="#"><svg class="icon"><use xlink:href="icons/sprite.svg#search"/></svg> Link Two</a> | <a href="#"><svg class="icon"><use xlink:href="icons/sprite.svg#paperclip"/></svg> Link Three</a>
       </p>
-      <pre class="prettyprint"><code>&lt;a href="#"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt; Link&lt;/a&gt;</code></pre>
+      <pre class="prettyprint"><code>&lt;a href="#"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#bell"/&gt;&lt;/svg&gt; Link One&lt;/a&gt; | &lt;a href="#"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#search"/&gt;&lt;/svg&gt; Link Two&lt;/a&gt; | &lt;a href="#"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#paperclip"/&gt;&lt;/svg&gt; Link Three&lt;/a&gt;</code></pre>
 
       <h2>Inside of Buttons</h2>
       <p>In this example, you'll see how icons are used in buttons. Each icon inherits color, size, and transition from the button.</p>
@@ -114,16 +118,29 @@
 &lt;button class="btn btn-sm btn-secondary"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt; Button&lt;/button&gt;
 &lt;button class="btn btn-sm btn-outline-secondary"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#heart"/&gt;&lt;/svg&gt; Button&lt;/button&gt;</code></pre>
 
+      <h2>Multi-Color Icons</h2>
+      <p>Unlike our single-color icons, our multi-color icons have defined fills that give them color. As you can see, when hovering over the buttons below the multi-color icon does not change. That's because they don't inherit the button color styles due to the svg's fill definitions.</p>
+      <p class="example">
+        <svg class="icon"><use xlink:href="icons/sprite.svg#pinwheel"/></svg>
+        <button class="btn btn-lg btn-default"><svg class="icon"><use xlink:href="icons/sprite.svg#pinwheel"/></svg> Button</button>
+        <button class="btn btn-lg btn-outline-secondary"><svg class="icon"><use xlink:href="icons/sprite.svg#pinwheel"/></svg> Button</button>
+        <button class="btn btn-lg btn-outline-primary"><svg class="icon"><use xlink:href="icons/sprite.svg#pinwheel"/></svg> Button</button>
+      </p>
+      <pre class="prettyprint"><code>&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#pinwheel"/&gt;&lt;/svg&gt;
+&lt;button class="btn btn-lg btn-default"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#pinwheel"/&gt;&lt;/svg&gt; Button&lt;/button&gt;
+&lt;button class="btn btn-lg btn-outline-secondary"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#pinwheel"/&gt;&lt;/svg&gt; Button&lt;/button&gt;
+&lt;button class="btn btn-lg btn-outline-primary"&gt;&lt;svg class="icon"&gt;&lt;use xlink:href="icons/sprite.svg#pinwheel"/&gt;&lt;/svg&gt; Button&lt;/button&gt;</code></pre>
+
     </section>
     
     <section>
 
       <h1>SVG with Generated Content</h1>
-      <p>In this example, I'm going to demonstrate how to use svg icons as generated content. Let's say that we have a list group and we want the <code>.active</code> list item to have a checkmark icon. We won't be using the svg sprite. Instead, we will use the individual <code>checkmark.svg</code> icon.</p>
+      <p>In this example, I'm going to demonstrate how to use svg icons as generated content. Let's say that we have a list group and we want the <code>.active</code> list item to have a checkmark icon. <strong>We won't be using the svg sprite.</strong> Instead, we will use the individual <code>checkmark.svg</code> icon.</p>
 
       <h2>Generated Demo One</h2>
       <h3>The Demo</h3>
-      <p><code>.list-group-item.active</code> receives a checkmark icon using the <code>:after</code> pseudo selector.</p>
+      <p><code>.list-group-item.active</code> receives a single-color <svg class="icon"><use xlink:href="icons/sprite.svg#checkmark"/></svg> checkmark icon using the <code>:after</code> pseudo selector.</p>
       <div id="generated-demo-1" class="list-group">
         <a href="#" class="list-group-item">Cras justo odio</a>
         <a href="#" class="list-group-item active">Dapibus ac facilisis in</a>
@@ -132,8 +149,8 @@
         <a href="#" class="list-group-item">Vestibulum at eros</a>
       </div>
       <h3>The CSS</h3>
-      <p>The CSS is pretty straighforward. We simply set <code>checkmark.svg</code> as a background image. BAM! We have a nice checkmark icon on the active list item.</p>
-      <p><strong>Uh oh. There is still one problem</strong>. The icon is black. What if we wanted it to be another color? Because the icon is a background image, there is no way to alter the color with vanilla CSS. Don't fret. I'll address this in Generated Demo Two.</p>
+      <p>The CSS is pretty straighforward. We simply set <code>checkmark.svg</code> as the background image. BAM! We have a nice checkmark icon on the active list item.</p>
+      <p><strong>Uh oh, there is still one problem. The icon is black.</strong> What if we wanted it to be another color? Because the icon is a background image, there is no way to alter the color with vanilla CSS. Don't fret. I'll address this in Generated Demo Two.</p>
       <pre class="prettyprint"><code>#generated-demo-1 .list-group-item.active:after {
   background-image: url("../icons/checkmark.svg");
   background-repeat: no-repeat;
@@ -152,7 +169,7 @@
 
       <h2>Generated Demo Two</h2>
       <h3>The Demo</h3>
-      <p><code>.list-group-item.active</code> receives a checkmark icon using the <code>:after</code> pseudo selector.</p>
+      <p><code>.list-group-item.active</code> receives a single-color <svg class="icon"><use xlink:href="icons/sprite.svg#checkmark"/></svg> checkmark icon using the <code>:after</code> pseudo selector. <strong>This time we will change the color of the checkmark to white.</strong></p>
       <div id="generated-demo-2" class="list-group">
         <a href="#" class="list-group-item">Cras justo odio</a>
         <a href="#" class="list-group-item active">Dapibus ac facilisis in</a>
@@ -161,9 +178,9 @@
         <a href="#" class="list-group-item">Vestibulum at eros</a>
       </div>
       <h3>The CSS/LESS</h3>
-      <p>The icon is now white! Fantastic! Okay. Now things are going to get a bit more complex. This is where the power of a CSS preprocessor comes in handy. We are going to use a <a href="http://lesscss.org/" target="_blank">LESS</a> "parametric mixin" to modify the svg background fill.</p>
+      <p><strong>Hell yes! The icon is now white!</strong> Okay. Now things are going to get a bit more complex. This is where the power of a CSS preprocessor comes in handy. We are going to use a <a href="http://lesscss.org/" target="_blank">LESS</a> "parametric mixin" to modify the svg background fill.</p>
 
-      <p>Check out the first line of the CSS/LESS code below. We call our <code>.svg-bg-add-fill()</code> LESS mixin and pass it two parameters: the path to the icon and a color (which can also be a variable). The mixin will generate a data-uri background image with a fill path using the color provided to the mixin.</p>
+      <p>Check out the first line of the CSS/LESS code below. We use our <code>.svg-bg-add-fill()</code> LESS mixin and pass it two parameters: the path to the icon and a hex color (or color variable). The mixin will generate a data-uri background image with a fill using the color provided to the mixin. <strong>Remember, our single-color svgs DON'T HAVE fills. This mixin will ADD a fill so that the icon's color can be altered.</strong></p>
       <pre class="prettyprint"><code>#generated-demo-2 .list-group-item.active:after {
   .svg-bg-add-fill("../icons/checkmark.svg", "#ffffff"); // THIS IS THE ONLY DIFFERENCE BETWEEN THE TWO DEMOS!
   background-repeat: no-repeat;
@@ -178,8 +195,8 @@
   width: 1em;
 }</code></pre>
       
-      <div class="alert alert-info" role="alert"><a href="https://twitter.com/zslabs" target="_blank" class="alert-link">Zach Schnackel</a> authored the parametric LESS mixin below. It is a brilliant solution to modifying svg background fills. For more information, see his full article here: <a href="http://zslabs.com/articles/svg-background-fill/" target="_blank" class="alert-link">Modifying SVG Background FIlls</a>.</div>
-      <h4>The Mixin</h4>
+      <div class="alert alert-info" role="alert"><a href="https://twitter.com/zslabs" target="_blank" class="alert-link">Zach Schnackel</a> authored the parametric LESS mixin below. It is a brilliant solution to modifying svg background fills. For more information, see his full article here: <a href="http://zslabs.com/articles/svg-background-fill/" target="_blank" class="alert-link">Modifying SVG Background Fills</a>.</div>
+      <h4>The Mixin - Add SVG Background Fill</h4>
       <pre class="prettyprint"><code>.svg-bg-add-fill(@src, @fill-new) {
   @data-uri: data-uri('image/svg+xml;charset=UTF-8', "@{src}");
   @replace-default: escape('&lt;path ');
@@ -188,9 +205,9 @@
   background-image: e(@replace-src);
 }</code></pre>
 
-      <h4>The Output</h4>
+      <h4>The CSS Output</h4>
       <pre class="prettyprint"><code>#generated-demo-2 .list-group-item.active:after {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3C%3Fxml%20version%3D%221.0%22%20encodin…200.002-0.067%200.002-0.101%200.002z%22%3E%3C%2Fpath%3E%0A%3C%2Fsvg%3E%0A");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M13.272%2027.2c-.696%200-1.355-.325-1.778-.885l-5.718-7.55c-.744-.98-.55-2.38.432-3.124.984-.745%202.38-.55%203.125.433l3.762%204.966%209.46-15.187c.65-1.045%202.026-1.365%203.073-.714%201.045.65%201.365%202.026.712%203.07L15.167%2026.148c-.39.626-1.06%201.018-1.794%201.05-.034.002-.067.002-.1.002z%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -203,8 +220,58 @@
   width: 1em;
 }</code></pre>
       
+      <h2>Generated Demo Three</h2>
+      <h3>The Demo</h3>
+      <p><code>.list-group-item.active</code> receives a multi-color pinwheel icon using the <code>:after</code> pseudo selector. <strong>This time we will change the multi-color <svg class="icon"><use xlink:href="icons/sprite.svg#pinwheel"/></svg> pinwheel to white.</strong></p>
+      <div id="generated-demo-3" class="list-group">
+        <a href="#" class="list-group-item">Cras justo odio</a>
+        <a href="#" class="list-group-item active">Dapibus ac facilisis in</a>
+        <a href="#" class="list-group-item">Morbi leo risus</a>
+        <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+        <a href="#" class="list-group-item">Vestibulum at eros</a>
+      </div>
+      <h3>The CSS/LESS</h3>
+      <p><strong>Hell yes! The multi-color icon is now white!</strong></p>
+      <p>Check out the first line of the CSS/LESS code below. We use our <code>.svg-bg-fill()</code> LESS mixin and pass it two parameters: the path to the icon and a hex color (or color variable). The mixin will generate a data-uri background image with a fill using the color provided to the mixin. <strong>Remember, our multi-color svgs HAVE fills. This mixin will REPLACE fill colors with the color passed to the mixin.</strong></p>
+      <pre class="prettyprint"><code>#generated-demo-3 .list-group-item.active:after {
+  .svg-bg-fill("../icons/pinwheel.svg", "#ffffff"); 
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  content: "";
+  height: 1em;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1em;
+}</code></pre>
+      <h4>The Mixin - SVG Background Fill</h4>
+      <pre class="prettyprint"><code>.svg-bg-fill(@src, @fill-new) {
+  @data-uri: data-uri('image/svg+xml;charset=UTF-8', "@{src}");
+  @replace-src: replace("@{data-uri}", 'fill\%3D\%22\%23[\w]{3,6}\%22', escape('fill="@{fill-new}"'), "g");
+  background-image:e(@replace-src);
+}</code></pre>
+      <h4>The CSS Output</h4>
+      <pre class="prettyprint"><code>#generated-demo-3 .list-group-item.active:after {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-241%20333%20128%20128%22%20enable-background%3D%22new%20-241%20333%20128%20128%22%3E%3Ctitle%3EAperture%3C%2Ftitle%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M-192%20419l-35.4-61.4c-8.5%2010.9-13.6%2024.5-13.6%2039.4%200%207.7%201.4%2015.1%203.9%2022h45.1z%22%2F%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M-165.5%20421h-70.9c8.2%2020.2%2026.3%2035.2%2048.3%2039l22.6-39z%22%2F%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M-150.4%20399l-35.4%2061.4c2.9.4%205.9.6%208.9.6%2019.7%200%2037.4-8.9%2049.1-23l-22.6-39z%22%2F%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M-162%20375l35.4%2061.4c8.5-10.9%2013.6-24.5%2013.6-39.4%200-7.7-1.4-15.1-3.9-22H-162z%22%2F%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M-188.5%20373h70.9c-8.2-20.2-26.3-35.2-48.3-39-.1%200-22.6%2039-22.6%2039z%22%2F%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M-203.6%20395l35.4-61.4c-2.9-.4-5.9-.6-8.9-.6-19.7%200-37.4%208.9-49.1%2023l22.6%2039z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  content: "";
+  height: 1em;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1em;
+}</code></pre>
+
 
     </section>
+
+
+    
 
   <script src="js/app.js"></script>
   <!-- prettify code examples; use class="prettyprint" on your pre blocks -->

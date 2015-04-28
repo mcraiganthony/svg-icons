@@ -55,7 +55,8 @@ a {
 
 #generated-demo-2 .list-group-item.active {
   &:after {
-    .svg-bg-add-fill("../icons/checkmark.svg", @list-group-active-color);
+    .svg-bg-add-fill("../../dist/icons/checkmark.svg", @list-group-active-color);
+    //.svg-bg-fill("../../dist/icons/pinwheel.svg", @list-group-active-color);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -66,3 +67,18 @@ a {
     .vert-align(absolute);
   }
 }
+
+#generated-demo-3 .list-group-item.active {
+  &:after {
+    .svg-bg-fill("../../dist/icons/pinwheel.svg", @list-group-active-color);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    content: "";
+    height: 1em;
+    right: 15px;
+    width: 1em;
+    .vert-align(absolute);
+  }
+}
+

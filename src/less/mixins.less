@@ -35,24 +35,28 @@
 // SVG Background Fill
 // -------------------------
 
-// for svgs that have fill defined
-.svg-bg-fill(@src, @fill-default, @fill-new) {
-    @escape-fill-default: escape(@fill-default);
-    @escape-fill-new: escape(@fill-new);
-    @data-uri: data-uri('image/svg+xml;charset=UTF-8', "@{src}");
-    @replace-src: replace("@{data-uri}", "@{escape-fill-default}", "@{escape-fill-new}");
+// for svgs that have fills defined and you want to replace one of the fills
+.svg-bg-replace-fill(@src, @fill-default, @fill-new) {
+    @data-uri: data-uri("image/svg+xml;charset=UTF-8", "@{src}");
+    @replace-src: replace("@{data-uri}", escape('@fill-default'), escape('@fill-new'));
     background-image:e(@replace-src);
 }
 
 // for svgs that don't have fill defined
 .svg-bg-add-fill(@src, @fill-new) {
-  @data-uri: data-uri('image/svg+xml;charset=UTF-8', "@{src}");
+  @data-uri: data-uri("image/svg+xml;charset=UTF-8", "@{src}");
   @replace-default: escape('<path ');
   @replace-new: escape('<path fill="@{fill-new}" ');
   @replace-src: replace("@{data-uri}", @replace-default, @replace-new, "g");
   background-image: e(@replace-src);
 }
 
+// for svgs that have fills defined and you want to replace all fills
+.svg-bg-fill(@src, @fill-new) {
+  @data-uri: data-uri('image/svg+xml;charset=UTF-8', "@{src}");
+  @replace-src: replace("@{data-uri}", 'fill\%3D\%22\%23[\w]{3,6}\%22', escape('fill="@{fill-new}"'), "g");
+  background-image:e(@replace-src);
+}
 
 // Vertical align
 // -------------------------
