@@ -43,7 +43,7 @@
 
       <h2>The SVGs</h2>
       <p>We start with a collection of svg icons. These icons are compiled into a single svg sprite using <a href="https://github.com/jkphl/gulp-svg-sprite" target="_blank">gulp-svg-sprite</a>. While we will predominantly use the svg sprite, we'll also want access to individual svgs - they'll come in handy when we tackle svgs in generated content.</p>
-      <div class="alert alert-info" role="alert"><strong>Remove SVG Fills for Single-Color Icons!</strong> For single-color icons, all fill definitions should be removed from each svg icon <strong>before</strong> being compiled into a sprite so that the icons can inherit the body color and be colored using CSS. For multi-colored icons, the fill definitions may remain.</div>
+      <div class="alert alert-info" role="alert"><strong>Remove SVG Fills for Single-Color Icons!</strong> For single-color icons, all fill definitions should be removed from each svg icon <strong>before</strong> being compiled into a sprite so that the icons can inherit the body color and be colored using CSS. Just open up the svg in your favorite text editor and remove any "fill=" that you see. For multi-colored icons, the fill definitions may remain.</div>
 
       <h2>Basic Usage</h2>
       <p>Using an external svg sprite gives us caching and the ability to use inline svg. For additional information and caveats, <a href="https://css-tricks.com/svg-use-external-source/" target="_blank">see Chris Coyier's great explanation</a>. A polyfill is necessary for IE 9-11. If you hate the idea of a polyfill, it's okay. This system will still work for you. Simply include the svg sprite on every page and change the <code>use xlink:href</code> reference to ONLY be the hashtag and filename.</p>
