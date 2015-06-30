@@ -12,7 +12,7 @@
     "!dist/**/*.*"
   ],
   "devDependencies": {
-    "bootstrap": "~3.2.0",
-    "svg4everybody": "~1.0.0"
+    "bootstrap": "3.3.5",
+    "svg4everybody": "1.0.0"
   }
 }
